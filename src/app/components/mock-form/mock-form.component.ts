@@ -19,36 +19,9 @@ export class MockFormComponent {
     toDate: new FormControl('2023-03-15'),
   });
 
-  generateData(fromDate: string, toDate: string) {
-    const startDate = new Date(fromDate);
-    const endDate = new Date(toDate);
-    const data = [];
-
-    let currentDate = startDate;
-    while (currentDate <= endDate) {
-      const dataItem = {
-        id: Math.floor(Math.random() * 1000),
-        date: this.dateToUtc(currentDate),
-      };
-      data.push(dataItem);
-
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-    return data;
-  }
-
-  dateToUtc(date: Date) {
-    return `${date.getUTCDate()} ${
-      date.getUTCMonth() + 1
-    } ${date.getUTCFullYear()}`;
-  }
-
   onSubmit() {
     const fromDateValue = this.mockForm.value.fromDate;
     const toDateValue = this.mockForm.value.toDate;
-    if (fromDateValue && toDateValue) {
-      this.generateData(fromDateValue, toDateValue);
-    }
-    console.warn(this.mockForm.value);
+    this.data.emit({ fromDateValue, toDateValue });
   }
 }

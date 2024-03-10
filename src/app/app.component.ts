@@ -18,4 +18,36 @@ import { MockFormComponent } from './components/mock-form/mock-form.component';
 })
 export class AppComponent {
   title = 'mock-creator';
+  mockData: { id: number; date: string }[] = [];
+  onDateRange(dateRange: { fromDateValue: string; toDateValue: string }) {
+    const { fromDateValue, toDateValue } = dateRange;
+    if (fromDateValue && toDateValue) {
+      this.mockData = this.generateData(fromDateValue, toDateValue);
+    }
+    debugger;
+  }
+
+  generateData(fromDate: string, toDate: string) {
+    const startDate = new Date(fromDate);
+    const endDate = new Date(toDate);
+    const data = [];
+
+    let currentDate = startDate;
+    while (currentDate <= endDate) {
+      const dataItem = {
+        id: Math.floor(Math.random() * 1000),
+        date: this.dateToUtc(currentDate),
+      };
+      data.push(dataItem);
+
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return data;
+  }
+
+  dateToUtc(date: Date) {
+    return `${date.getUTCDate()} ${
+      date.getUTCMonth() + 1
+    } ${date.getUTCFullYear()}`;
+  }
 }
