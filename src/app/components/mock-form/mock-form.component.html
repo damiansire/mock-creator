@@ -1,1 +1,8 @@
-<p>mock-form works!</p>
+<form [formGroup]="mockForm" (ngSubmit)="onSubmit()">
+  <label for="from-date">From date: </label>
+  <input id="from-date" type="date" formControlName="fromDate" />
+  <label for="to-date">To date: </label>
+  <input id="to-date" type="date" formControlName="toDate" />
+  <p>Complete the form to enable button.</p>
+  <button type="submit" [disabled]="!mockForm.valid">Submit</button>
+</form>
