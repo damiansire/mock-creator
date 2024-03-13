@@ -24,7 +24,6 @@ export class AppComponent {
     if (fromDateValue && toDateValue) {
       this.mockData = this.generateData(fromDateValue, toDateValue);
     }
-    debugger;
   }
 
   generateData(fromDate: string, toDate: string) {
